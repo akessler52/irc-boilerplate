@@ -1,4 +1,4 @@
-<?php
+#!/usr/bin/env php
 
 $_s['nick'] = '<NICKNAME>';
 $nick = $_s['nick'];
@@ -79,5 +79,3 @@ while (true) {
 	sleep(30);
 
 } // End connection loop
-
-?>
