@@ -1,8 +1,14 @@
+# /usr/bin/env python
+
+
 #BOILERBOT.py                         
 
-#This code is intended to be a simple boilerplate for building a simple python bot.To better understand whats goin on, I recommend going through and commenting every single line with its purpose in the bot.
+# This code is intended to be a simple boilerplate for building a simple python bot.
+# To better understand whats goin on, I recommend going through and commenting 
+# every single line with its purpose in the bot.
 # https://docs.python.org/2/
 # https://tools.ietf.org/html/rfc2812i
+
 import socket              
 import string
 import this
