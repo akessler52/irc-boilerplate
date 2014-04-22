@@ -7,13 +7,16 @@ To better understand whats goin on,
 I recommend going through and commenting
 every single line with its purpose in the bot.
 
-https://docs.python.org/2/
+Fully python 3 compatible but will also
+run just fine on python 2
+
+https://docs.python.org/3/
 https://tools.ietf.org/html/rfc2812i
 """
 
 import socket
 
-HOST = "localhost" #yakko.cs.wmich.edu
+HOST = "localhost"  # yakko.cs.wmich.edu
 PORT = 6667
 NICK = "boilerbot"
 IDENT = 'boilerbot'
@@ -30,26 +33,32 @@ def sendraw(string):
     print('>', string.strip())
     SOCK.send(string.encode())
 
+
 def privmsg(message):
     """Send a message to CHANNEL"""
     msg = "PRIVMSG %s :%s\r\n" % (CHANNEL, message)
     sendraw(msg)
 
+
 def nick(nickname):
     """Set IRC nick"""
     sendraw("NICK %s\r\n" % nickname)
+
 
 def user(ident, name):
     """Set IRC user"""
     sendraw("USER %s 0 * :%s\r\n" % (ident, name))
 
+
 def join(chan):
     """Join IRC channel"""
     sendraw("JOIN %s\r\n" % chan)
 
+
 def pong(response):
     """Send PONG response to server PING"""
     sendraw("PONG %s\r\n" % response)
+
 
 def listen():
     """Listen forever on socket"""
