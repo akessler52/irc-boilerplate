@@ -16,7 +16,7 @@ https://tools.ietf.org/html/rfc2812i
 
 import socket
 
-HOST = "localhost"  # yakko.cs.wmich.edu
+HOST = "dot"  # must be run from yakko to connect directly
 PORT = 6667
 NICK = "boilerbot"
 IDENT = 'boilerbot'
