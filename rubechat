@@ -1,0 +1,54 @@
+#! /usr/bin/env ruby
+
+# rube-chat - A simple threaded IRC bot framework in ruby
+require 'socket'
+require 'thread'
+SERVER, PORT, NICK, CHAN = ARGV
+puts SERVER
+puts PORT
+puts NICK
+puts CHAN
+@irc = TCPSocket.new SERVER, PORT
+
+@listen = Thread.new{
+	while true
+		line = @irc.gets
+		sender = line.split("!")[0][1..-1]
+		if line != nil
+			message = line.split(' ')
+			if message[0] == "PING"
+				@irc.puts "PONG #{message[1]}"
+			else
+				puts line.strip
+				if line.include? "hi #{NICK}"
+					sender = line.split("!")[0][1..-1]
+					@irc.puts "PRIVMSG ##{CHAN} :Hello #{sender}"
+				end
+			end
+		end
+	end
+}
+
+# Start the IRC session. The "sleep" lines are there because some servers seem
+# to get overwhelmed if you don't space this out. Remove if desired.
+def initialize
+	@listen.run
+	@irc.puts "USER #{NICK} 0 * :#{NICK} #{NICK}"
+	sleep 1
+	@irc.puts "NICK #{NICK}"
+	sleep 1
+	@irc.puts "JOIN ##{CHAN}"
+	sleep 1
+end
+
+
+initialize 
+# Listen for user kill
+while true
+	command = STDIN.gets.chomp
+	if command[0..3] == "QUIT"
+		@irc.puts command
+		break
+	end
+end
+Thread.kill(@listen)
